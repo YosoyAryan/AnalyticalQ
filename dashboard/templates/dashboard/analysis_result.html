@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ analysis_type|title }} Analysis Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f0f0f, #1e1e1e);
+            font-family: 'Inter', sans-serif;
+            color: #f1f1f1;
+        }
+        .brand-header {
+            font-size: 40px;
+            font-weight: 700;
+            color: #facc15;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        .result-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .query-text {
+            color: #facc15;
+        }
+        .back-btn {
+            background-color: #facc15;
+            color: #1a1a1a;
+        }
+        .back-btn:hover {
+            background-color: #eab308;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center px-4 py-10">
+
+    <div class="brand-header">AnalyticalQ</div>
+
+    <div class="result-box rounded-lg max-w-4xl w-full p-8 shadow-lg">
+        <div class="mb-6 text-center">
+            <h1 class="text-3xl font-bold text-white">{{ analysis_type|title }} Analysis</h1>
+            <p class="text-gray-300 mt-1">Query: <span class="query-text font-semibold">"{{ query }}"</span></p>
+        </div>
+
+        {% if result_text %}
+            <div class="p-6 rounded-lg border border-gray-600 bg-black bg-opacity-40 text-gray-100 leading-relaxed whitespace-pre-wrap font-mono overflow-x-auto">
+                {{ result_text }}
+            </div>
+        {% else %}
+            <div class="text-red-500 bg-red-100 bg-opacity-10 p-4 rounded border border-red-300 text-center">
+                No analysis could be performed.
+            </div>
+        {% endif %}
+
+        <div class="mt-8 text-center">
+            <a href="{% url 'options' %}" class="inline-block px-6 py-2 rounded back-btn font-semibold transition duration-300">
+                ← Back to Options
+            </a>
+        </div>
+    </div>
+</body>
+</html>

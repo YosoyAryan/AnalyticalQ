@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Insights</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f0f0f, #1e1e1e);
+            font-family: 'Inter', sans-serif;
+            color: #f1f1f1;
+        }
+        .brand-header {
+            font-size: 40px;
+            font-weight: 700;
+            color: #facc15;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #121212;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #facc15;
+            text-align: center;
+        }
+        h3 {
+            color: #facc15;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #ddd;
+        }
+        .insight-box {
+            background-color: #1f1f1f;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 6px solid #6366f1;
+            white-space: pre-line;
+            color: #f1f1f1;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .back-link a {
+            text-decoration: none;
+            background-color: #facc15;
+            color: #1a1a1a;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+        .back-link a:hover {
+            background-color: #eab308;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="brand-header">AnalyticalQ</div>
+
+    <div class="container">
+        <h1>🔍 AI-Generated Insights</h1>
+
+        <div class="section">
+            <h3>Your Query:</h3>
+            <p>{{ query }}</p>
+        </div>
+
+        <div class="section">
+            <h3>Insights:</h3>
+            <div class="insight-box">
+                {% if insight_text %}
+                    {{ insight_text }}
+                {% else %}
+                    <p>No insights were generated. Please try again with a different query.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="back-link">
+            <a href="{% url 'options' %}">⬅ Back to Options</a>
+        </div>
+    </div>
+
+</body>
+</html>

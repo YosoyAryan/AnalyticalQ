@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload CSV - AnalyticalQ</title>
+  <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1e1e1e);
+      color: #f1f1f1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      padding: 40px 0 20px;
+      text-align: center;
+      background-color: #121212;
+      border-bottom: 1px solid #2c2c2c;
+      font-size: 40px;
+      font-weight: 700;
+      color: #facc15; /* Yellow */
+      letter-spacing: 2px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      text-transform: uppercase;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 40px;
+      margin-top: 40px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 22px;
+      font-weight: 500;
+      color: #eaeaea;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .custom-file-label {
+      background: #222;
+      border: 1px solid #333;
+      color: #ccc;
+      padding: 12px;
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .custom-file-label:hover {
+      background: #333;
+      color: #fff;
+    }
+
+    button {
+      background-color: #facc15; /* Yellow */
+      color: #1a1a1a;
+      border: none;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #eab308; /* darker yellow */
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 25px;
+      }
+
+      header {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>AnalyticalQ</header>
+
+  <div class="container">
+    <h1>Upload your CSV file</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <label for="id_file" class="custom-file-label">Choose CSV File</label>
+      {{ form.file }}
+
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById("id_file");
+    const label = document.querySelector(".custom-file-label");
+
+    fileInput.addEventListener("change", function () {
+      if (fileInput.files.length > 0) {
+        label.textContent = fileInput.files[0].name;
+      }
+    });
+  </script>
+
+</body>
+</html>
